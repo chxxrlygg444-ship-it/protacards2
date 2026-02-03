@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portafolio | Chxrly</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="site-bg">
+  <header class="site-header">
+    <div class="container header-grid">
+      <a class="brand" href="index.html">Chxrly</a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="proyectos.html">Proyectos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-grid">
+        <div class="perfil-foto">
+          <img
+            src="perfil-640.jpg"
+            srcset="perfil-320.jpg 320w, perfil-640.jpg 640w, perfil-1280.jpg 1280w"
+            sizes="(max-width:576px) 120px, (max-width:992px) 160px, 200px"
+            alt="Foto de perfil de Chxrly">
+        </div>
+
+        <div class="hero-text">
+          <h1>Chxrly — Desarrollador Frontend</h1>
+          <p class="lead">Estudiante de Derecho con pasión por el desarrollo web. Diseño interfaces accesibles y responsivas con enfoque mobile‑first.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="proyectos.html">Ver proyectos</a>
+            <a class="btn btn-outline" href="contacto.html">Contactar</a>
+          </div>
+
+          <div class="badges">
+            <span class="badge">HTML5</span>
+            <span class="badge">CSS Grid</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">Git</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary container">
+      <div class="summary-grid">
+        <div>
+          <h2>Sobre mí</h2>
+          <p class="text-muted">Me especializo en interfaces limpias, accesibles y con buen rendimiento. Trabajo con metodologías mobile‑first y componentes reutilizables.</p>
+        </div>
+        <div>
+          <h2>Experiencia</h2>
+          <ul class="text-muted">
+            <li>Proyectos personales: UI/UX y componentes.</li>
+            <li>Control de versiones y despliegue estático.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="copyright">&copy; <span id="year"></span> Chxrly</div>
+      <div class="socials">
+        <a href="#" aria-label="GitHub">GitHub</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="mailto:tu@email.com" aria-label="Email">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('site-nav');
+      btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Cards Responsive",
+    "description": "Galería de cards responsive con datos dinámicos y localStorage.",
+    "image_base": "placeholder1",
+    "link": "#"
+  },
+  {
+    "title": "Landing Page",
+    "description": "Landing responsive con hero, secciones y formulario.",
+    "image_base": "placeholder2",
+    "link": "#"
+  },
+  {
+    "title": "UI Components",
+    "description": "Colección de componentes reutilizables (cards, badges, forms).",
+    "image_base": "placeholder3",
+    "link": "#"
+  }
+]

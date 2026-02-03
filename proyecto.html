@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyectos | Chxrly</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="site-bg">
+  <header class="site-header">
+    <div class="container header-grid">
+      <a class="brand" href="index.html">Chxrly</a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="site-nav" id="site-nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="proyectos.html" class="active">Proyectos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+      <header class="section-header">
+        <h1>Galería de proyectos</h1>
+        <p class="text-muted">Cards responsivas organizadas con CSS Grid (1 → 2 → 3 columnas).</p>
+      </header>
+
+      <div id="projectsGrid" class="projects-grid" aria-live="polite">
+        <!-- Cards se insertan por JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="copyright">&copy; <span id="year2"></span> Chxrly</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year2').textContent = new Date().getFullYear();
+
+    // Carga projects.json y crea srcset automáticamente
+    fetch('projects.json')
+      .then(r => r.json())
+      .then(data => {
+        const grid = document.getElementById('projectsGrid');
+        data.forEach(p => {
+          const col = document.createElement('article');
+          col.className = 'project-card';
+          const srcset = `${p.image_base}-320.jpg 320w, ${p.image_base}-640.jpg 640w, ${p.image_base}-1280.jpg 1280w`;
+          const sizes = "(max-width:576px) 100vw, (max-width:992px) 48vw, 31vw";
+          col.innerHTML = `
+            <img src="${p.image_base}-640.jpg" srcset="${srcset}" sizes="${sizes}" alt="${p.title}">
+            <div class="card-body">
+              <h3>${p.title}</h3>
+              <p class="text-muted">${p.description}</p>
+              <a class="btn" href="${p.link}">Ver proyecto</a>
+            </div>
+          `;
+          grid.appendChild(col);
+        });
+      })
+      .catch(() => {
+        document.getElementById('projectsGrid').innerHTML = '<p class="text-muted">No se pudieron cargar los proyectos.</p>';
+      });
+
+    (function(){
+      const btns = document.querySelectorAll('.nav-toggle');
+      btns.forEach(b => b.addEventListener('click', () => {
+        document.getElementById('site-nav').classList.toggle('open');
+      }));
+    })();
+  </script>
+</body>
+</html>
