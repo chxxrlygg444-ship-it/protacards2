@@ -11,7 +11,7 @@
 
 <body class="bg-dark text-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
   <div class="container">
     <a class="navbar-brand fw-bold" href="index.html">Chxrly</a>
 
@@ -22,54 +22,97 @@
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="index.html">Perfil</a></li>
-        <li class="nav-item"><a class="nav-link" href="proyectos.html">Proyectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="proyecto.html">Proyectos</a></li>
         <li class="nav-item"><a class="nav-link" href="habilidades.html">Habilidades</a></li>
-        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
       </ul>
     </div>
-  </div>
-</nav>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html">Chxrly</a>
   </div>
 </nav>
 
 <section class="container py-5">
     <h2 class="text-center fw-bold mb-4">Contacto</h2>
 
-    <form class="bg-secondary p-4 rounded shadow" id="formContacto">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-        <div class="mb-3">
-            <label class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" required>
+            <!-- FORMULARIO -->
+            <form id="contactForm" class="bg-secondary p-4 rounded shadow">
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo</label>
+                    <input type="email" id="correoPersona" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Mensaje</label>
+                    <textarea id="mensaje" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100">Guardar</button>
+
+            </form>
+
+            <!-- LISTA DE SOLO 2 PERSONAS -->
+            <div class="mt-4">
+                <h5 class="fw-bold">Personas guardadas</h5>
+                <ul id="lista" class="list-group"></ul>
+            </div>
+
+            <!-- TUS DATOS -->
+            <div class="mt-5 p-3 bg-black rounded shadow">
+                <h5 class="fw-bold">Mis Datos</h5>
+                <p class="mb-1"><strong>GitHub:</strong> <span id="git">chxxrlygg444-ship-it</span></p>
+                <p class="mb-1"><strong>Correo:</strong> <span id="correo">carlitos69@gmail.com</span></p>
+                <p class="mb-1"><strong>Teléfono:</strong> <span id="telefono">5616341014</span></p>
+            </div>
+
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Asunto</label>
-            <input type="text" class="form-control" id="asunto" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Mensaje</label>
-            <textarea class="form-control" id="mensaje" rows="4" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-success">Enviar</button>
-    </form>
+    </div>
 </section>
 
 <footer class="bg-black text-center py-4 mt-5">
-    <p>© 2026 Chxrly</p>
+    <p>© 2026 Infotec</p>
 </footer>
 
-<script src="app.js"></script>
+<script>
+    const form = document.getElementById("contactForm");
+    const lista = document.getElementById("lista");
+    let personas = [];
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (personas.length >= 2) {
+            alert("Solo puedes guardar 2 personas.");
+            return;
+        }
+
+        const nombre = document.getElementById("nombre").value;
+        const correo = document.getElementById("correoPersona").value;
+        const mensaje = document.getElementById("mensaje").value;
+
+        personas.push({ nombre, correo, mensaje });
+
+        actualizarLista();
+        form.reset();
+    });
+
+    function actualizarLista() {
+        lista.innerHTML = "";
+        personas.forEach((p) => {
+            const li = document.createElement("li");
+            li.className = "list-group-item bg-dark text-light border-secondary";
+            li.textContent = `${p.nombre} (${p.correo}): ${p.mensaje}`;
+            lista.appendChild(li);
+        });
+    }
+</script>
+
 </body>
 </html>
